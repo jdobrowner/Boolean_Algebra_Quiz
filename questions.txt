@@ -1,0 +1,182 @@
+www.logic-quiz.com
+
+So you think you're good at logic? Let's find out.
+
+Congratulations! You are ______ at logic.
+
+Scale: godawful (0), pathetic(1-2), lousy(3-4), unremarkable(5-6), competent(7-8), superb(9), phenomenal(10)
+
+// a, b, c, and d are unknown boolean variables
+
+1///////////////////////////////////////////////
+
+Which is a logical equivalent to:
+
+( a || ( a && b ) ) && ( c && ( c || d ) )
+
+- a && c
+- a && d
+- b && c
+- b && d
+
+Answer: a && c
+
+Solution:
+
+( a ) && ( c ) by Absorption laws
+
+2////////////////////////////////////////////////
+
+Which is a logical equivalent to:
+
+!( a && b ) || ( !c || !d )
+
+- ( a && b && c && d )
+- !( a && b && c && d )
+- ( !a || !b || c || d )
+ - !( a || b || c || d )
+
+Answer: !( a && b && c && d )
+
+Solution:
+
+!(a && b) || !(c && d) by De Morgan's laws
+!(( a && b ) && ( c && d )) by De Morgan's laws
+!( a && b && c && d ) by associative laws
+
+3/////////////////////////////////////////////////
+
+Which is a logical equivalent to:
+
+( a || b ) || !( a && c )
+
+- b && c
+- !b && c
+- b || !c
+- !b || c
+
+Answer: b || !c
+
+Solution:
+
+( a || b ) || ( !a || !c ) by De Morgan's laws
+( a || !a ) || ( b || !c ) by Associative laws
+true || ( b || !c ) by Negation laws
+b || !c by Identity laws
+
+4/////////////////////////////////////////////////
+
+Which is a logical equivalent to:
+
+!( !a && !b && !c && !d )
+
+- a || b || c || d
+- a && b && c && d
+- !a || !b || !c || !d
+- !( a || b || c || d )
+
+Answer: a || b || c || d
+
+Solution:
+
+!!( a || b || d || c ) by De Morgan's laws
+a || b || c || d by Double Negation Laws
+
+5////////////////////////////////////////////////
+
+Which is a logical equivalent to:
+
+a || (!a && b)
+
+- a || b
+- a && b
+- false
+- true
+
+Answer: a || b
+
+Solution:
+
+(a || !a) && (a || b) by the distributive law
+true && (a || b) by the negation law
+a || b by the identity law
+
+6///////////////////////////////////////////////
+
+What is the value of c?
+
+var c = a == b ? a && b : a || b;
+
+- true
+- false
+- a && b
+- a || b
+
+Solution: Truth Table
+
+Answer: a || b
+
+7////////////////////////////////////////////////
+
+What is the value of c?
+
+var c = a || b ? a : b;
+
+- true
+- false
+- a
+- b
+
+Solution: Truth Table
+
+Answer: a
+
+8///////////////////////////////////////////////
+
+What is the value of c?
+
+var c = a ? a : b;
+
+- a
+- b
+- a || b
+- a && b
+
+Solution: Truth Table
+
+Answer: a || b
+
+9///////////////////////////////////////////////
+
+What is the value of c?
+
+var c = a && b ? a : b;
+
+- a
+- b
+- a || b
+- a && b
+
+Solution: Truth Table
+
+Answer: b
+
+10/////////////////////////////////////////////
+
+Which is a logical equivalent to:
+
+a || (b || !a)
+
+- a
+- b
+- a || b
+- true
+
+Answer: true
+
+Solution:
+
+a || (!a || b) by commutative laws
+(a || !a) || b by associative laws
+true || b by negation laws
+true by domination laws
