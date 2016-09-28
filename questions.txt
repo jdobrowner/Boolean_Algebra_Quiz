@@ -101,67 +101,7 @@ Solution:
 true && (a || b) by the negation law
 a || b by the identity law
 
-6///////////////////////////////////////////////
-
-What is the value of c?
-
-var c = a == b ? a && b : a || b;
-
-- true
-- false
-- a && b
-- a || b
-
-Solution: Truth Table
-
-Answer: a || b
-
-7////////////////////////////////////////////////
-
-What is the value of c?
-
-var c = a || b ? a : b;
-
-- true
-- false
-- a
-- b
-
-Solution: Truth Table
-
-Answer: a
-
-8///////////////////////////////////////////////
-
-What is the value of c?
-
-var c = a ? a : b;
-
-- a
-- b
-- a || b
-- a && b
-
-Solution: Truth Table
-
-Answer: a || b
-
-9///////////////////////////////////////////////
-
-What is the value of c?
-
-var c = a && b ? a : b;
-
-- a
-- b
-- a || b
-- a && b
-
-Solution: Truth Table
-
-Answer: b
-
-10/////////////////////////////////////////////
+6/////////////////////////////////////////////
 
 Which is a logical equivalent to:
 
@@ -180,3 +120,63 @@ a || (!a || b) by commutative laws
 (a || !a) || b by associative laws
 true || b by negation laws
 true by domination laws
+
+7///////////////////////////////////////////////
+
+What is the value of c?
+
+var c = a == b ? a && b : a || b;
+
+- true
+- false
+- a && b
+- a || b
+
+Solution: Truth Table
+
+Answer: a || b
+
+8////////////////////////////////////////////////
+
+What is the value of c?
+
+var c = a || b ? a : b;
+
+- true
+- false
+- a
+- b
+
+Solution: Truth Table
+
+Answer: a
+
+9///////////////////////////////////////////////
+
+What is the value of c?
+
+var c = a ? a : b;
+
+- a
+- b
+- a || b
+- a && b
+
+Solution: Truth Table
+
+Answer: a || b
+
+10///////////////////////////////////////////////
+
+What is the value of c?
+
+var c = a && b ? a : b;
+
+- a
+- b
+- a || b
+- a && b
+
+Solution: Truth Table
+
+Answer: b
