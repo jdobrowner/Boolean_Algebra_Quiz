@@ -6,3 +6,7 @@
   color: blue;
   font-size: 2em;
 }
+
+.hidable-content-header {
+  background-color: brown;
+}
