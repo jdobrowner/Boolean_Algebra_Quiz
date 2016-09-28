@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Logic Quiz</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
   <header>
@@ -17,55 +18,95 @@
       <div class="notebook">
         <div class="scratch-paper">
           <h3>scratch paper<span class="plus-minus-button">-</span></h3>
-          <textarea name="scratch paper" rows="12" cols="30" placeholder="true != false"></textarea>
+          <textarea class="could-hide" name="scratch paper" rows="12" cols="30" placeholder="true != false"></textarea>
         </div>
-        <div>
-          <h3>table of logical equivalences<span class="plus-minus-button">-</span></h3>
-          <table>
+        <div class="logic-table">
+          <h3>logical equivalences<span class="plus-minus-button">-</span></h3>
+          <table class="could-hide">
             <tr>
-              <tc>fizz</tc>
-              <tc>fizz</tc>
+              <td>!(p && q) = !p || !q</td>
+              <td>De Morgan's laws</td>
             </tr>
             <tr>
-              <tc>fizz</tc>
-              <tc>fizz</tc>
+              <td>!(p || q) = !p && !q</td>
+              <td></td>
             </tr>
             <tr>
-              <tc>fizz</tc>
-              <tc>fizz</tc>
+              <td>p || (p && q) = p</td>
+              <td>Absorption laws</td>
             </tr>
             <tr>
-              <tc>fizz</tc>
-              <tc>fizz</tc>
+              <td>p && (p || q) = p</td>
+              <td></td>
             </tr>
             <tr>
-              <tc>fizz</tc>
-              <tc>fizz</tc>
+              <td>p || q = q || p</td>
+              <td>Commutative laws</td>
             </tr>
             <tr>
-              <tc>fizz</tc>
-              <tc>fizz</tc>
+              <td>p && q = q && p</td>
+              <td></td>
             </tr>
             <tr>
-              <tc>fizz</tc>
-              <tc>fizz</tc>
+              <td>(p || q) || r = p || (q || r)</td>
+              <td>Associative laws</td>
             </tr>
             <tr>
-              <tc>fizz</tc>
-              <tc>fizz</tc>
+              <td>(p && q) && r = p && (q && r)</td>
+              <td></td>
             </tr>
             <tr>
-              <tc>fizz</tc>
-              <tc>fizz</tc>
+              <td>p || (q && r) = (p || q) && (p || r)</td>
+              <td>Distributive laws</td>
             </tr>
             <tr>
-              <tc>fizz</tc>
-              <tc>fizz</tc>
+              <td>p && (q || r) = (p && q) || (p && r)</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>p || p = p</td>
+              <td>Idempotent laws</td>
+            </tr>
+            <tr>
+              <td>p && p = p</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>p && true = p</td>
+              <td>Identity laws</td>
+            </tr>
+            <tr>
+              <td>p || false = p</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>p || true = true</td>
+              <td>Domination laws</td>
+            </tr>
+            <tr>
+              <td>p && false = false</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>p || !p = true</td>
+              <td>Negation laws</td>
+            </tr>
+            <tr>
+              <td>p && !p = false</td>
+              <td>fizz</td>
+            </tr>
+            <tr>
+              <td>!(!p) = p</td>
+              <td>Double negation law</td>
             </tr>
           </table>
         </div>
       </div>
     </div>
   </main>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="app.js"></script>
 </body>
 </html>

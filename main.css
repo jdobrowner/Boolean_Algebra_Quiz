@@ -1,0 +1,8 @@
+.hidden {
+  display: none;
+}
+
+.plus-minus-button {
+  color: blue;
+  font-size: 2em;
+}
