@@ -31,9 +31,9 @@ Which is a logical equivalent to:
 
 !( a && b ) || ( !c || !d )
 
-- ( a && b && c && d )
+- a && b && c && d
 - !( a && b && c && d )
-- ( !a || !b || c || d )
+- !a || !b || c || d
  - !( a || b || c || d )
 
 Answer: !( a && b && c && d )
@@ -42,7 +42,7 @@ Solution:
 
 !(a && b) || !(c && d) by De Morgan's laws
 !(( a && b ) && ( c && d )) by De Morgan's laws
-!( a && b && c && d ) by associative laws
+!( a && b && c && d ) by Associative laws
 
 3/////////////////////////////////////////////////
 

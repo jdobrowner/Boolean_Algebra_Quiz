@@ -10,3 +10,23 @@
 .hidable-content-header {
   background-color: brown;
 }
+
+.notes {
+  color: purple;
+}
+
+.question-text {
+  color: green;
+}
+
+#question-page {
+  width: 600px;
+  height: 600px;
+  background-color: LightGrey;
+}
+
+#solution-page {
+  width: 600px;
+  height: 600px;
+  background-color: green;
+}
