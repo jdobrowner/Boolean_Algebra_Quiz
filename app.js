@@ -3,6 +3,7 @@
 $(function() {
     setUpQuizToolsToggleButtons();
     beginQuiz();
+    answerButtonHandlers();
 });
 
 //*--------- set up scratch paper and logic table toggle -------------*
@@ -35,9 +36,9 @@ function toggleQuizTool($button, isShowing) {
 //*---------- setup question page div and solution page div --------------*
 
 function beginQuiz() {
-$('.begin-quiz').click( function(event){
+$('#quiz').on('click', '#begin-button', function(event){
 
-  quizApp.state.page = 1;
+  quizApp.state.page = 0;
   var $quizDiv = $('#quiz');
 
   $quizDiv.children().remove();
@@ -102,17 +103,31 @@ function addSolution() {
 
 function answerButtonHandlers() {
 
-  $('a1').click( function(event) {
+  $('#quiz').on('click', '#a1', function(event) {
+    console.log('a1 clicked');
     determineCorrectness(1);
+    switchPages();
   });
-  $('a2').click( function(event) {
+  $('#quiz').on('click', '#a2', function(event) {
     determineCorrectness(2);
+    switchPages();
   });
-  $('a3').click( function(event) {
+  $('#quiz').on('click', '#a3', function(event) {
     determineCorrectness(3);
+    switchPages();
   });
-  $('a4').click( function(event) {
+  $('#quiz').on('click', '#a4', function(event) {
     determineCorrectness(4);
+    switchPages();
+  });
+
+  //*------- next question and retake quiz buttons --------*
+
+  $('#quiz').on('click', '#next', function(event) {
+    switchPages();
+  });
+  $('#quiz').on('click', '#retake', function(event) {
+    resetQuiz();
   });
 
 }
@@ -132,6 +147,38 @@ function determineCorrectness(n) {
   else {
     quizApp.lastAnswerWas = false;
   }
+}
+
+//*----------- switch between questions and solutions pages -----------*
+
+function switchPages() {
+  if (quizApp.state.page === 20) finalPage();
+  else quizApp.state.page % 2 === 0 ? addQuestion() : addSolution();
+}
+
+//*---------------------- set up final page --------------------------*
+
+function finalPage() {
+  $('#solution-page').addClass('hidden');
+  var $quiz = $('#quiz');
+
+  var addText = '<div id="final-page"><h2>Congradulations! You are ';
+  addText += quizApp.howGood[quizApp.state.points] + ' at logic.</h2>';
+  addText += '</br><p>Your score:  ' + quizApp.state.points + ' / 10</p>';
+  addText += '<button id="retake" class="begin-quiz">try again</button></div>';
+  $quiz.append(addText);
+}
+
+//*------------------- reset state and commence quiz ---------------------*
+
+function resetQuiz() {
+  quizApp.state.page = 0;
+  quizApp.state.points = 0;
+  quizApp.state.questionNum = 0;
+  quizApp.answersChosen = [];
+
+  $('#final-page').remove();
+  addQuestion();
 }
 
 
