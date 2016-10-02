@@ -4,119 +4,157 @@
 <head>
     <meta charset="UTF-8">
     <title>Logic Quiz</title>
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="reset.css">
     <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" media="(max-width: 1100px)" href="main.css" />
 </head>
 
 <body>
-    <header>
-        <h1>So you think you're good at logic? Let's find out.</h1>
-    </header>
-
     <main>
-        <div>
-            <div id="quiz">
+        <div class="quiz-container">
+          <div class="landing-and-score-page space-around">
+            <div class="words-container">
+              <h1> So You Think You're Good At <span class="code">Logic</span>?</br>Let's Find Out.</h1>
                 <p>Before taking this quiz you should be familar with <a href="https://en.wikipedia.org/wiki/Logical_equivalence" target="_blank">logical equivalences</a>, <a href="https://en.wikipedia.org/wiki/Truth_table" target="_blank">truth tables</a>,
-                    and the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator" target="_blank">conditional operator</a>. The syntax is that of most programming languages.</br>
-                    </br>During the quiz you will have access to a table of logical equivalences and a “scratch paper” text area in which you can work out a problem, as shown below.</p>
-                <button id="begin-button" class="begin-quiz" data-id="quiz">take quiz</button>
+                    and the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator" target="_blank">conditional operator</a>.</br></br>The syntax is that of most programming languages.</br>
+
             </div>
-            <div id="quiz-tools-container">
-                <div>
-                    <div id="paper-header" class="hidable-content-header">
-                        <h3>scratch paper</h3>
-                        <div><span>-</span></div>
-                    </div>
-                    <div id='scratch-paper'>
-                        <textarea name="scratch paper" rows="12" cols="30" placeholder="true != false"></textarea>
-                    </div>
-                </div>
-                <div>
-                    <div id="table-header" class="hidable-content-header">
-                        <h3>logical equivalences</h3>
-                        <div><span>-</span></div>
-                    </div>
-                    <div id='logic-table'>
-                        <table>
-                            <tr>
-                                <td>!(p && q) = !p || !q</td>
-                                <td>De Morgan's laws</td>
-                            </tr>
-                            <tr>
-                                <td>!(p || q) = !p && !q</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>p || (p && q) = p</td>
-                                <td>Absorption laws</td>
-                            </tr>
-                            <tr>
-                                <td>p && (p || q) = p</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>p || q = q || p</td>
-                                <td>Commutative laws</td>
-                            </tr>
-                            <tr>
-                                <td>p && q = q && p</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>(p || q) || r = p || (q || r)</td>
-                                <td>Associative laws</td>
-                            </tr>
-                            <tr>
-                                <td>(p && q) && r = p && (q && r)</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>p || (q && r) = (p || q) && (p || r)</td>
-                                <td>Distributive laws</td>
-                            </tr>
-                            <tr>
-                                <td>p && (q || r) = (p && q) || (p && r)</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>p || p = p</td>
-                                <td>Idempotent laws</td>
-                            </tr>
-                            <tr>
-                                <td>p && p = p</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>p && true = p</td>
-                                <td>Identity laws</td>
-                            </tr>
-                            <tr>
-                                <td>p || false = p</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>p || true = true</td>
-                                <td>Domination laws</td>
-                            </tr>
-                            <tr>
-                                <td>p && false = false</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>p || !p = true</td>
-                                <td>Negation laws</td>
-                            </tr>
-                            <tr>
-                                <td>p && !p = false</td>
-                                <td>fizz</td>
-                            </tr>
-                            <tr>
-                                <td>!(!p) = p</td>
-                                <td>Double negation law</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+            <div class="button-container">
+                <button id="begin-button" class="begin-quiz" data-id="quiz">begin quiz</button>
             </div>
+          </div>
+
+          <div class="progress-bar hidden"><div></div>
+          <div id="pb1" class="circle"></div>
+          <div class="line"></div>
+          <div id="pb2" class="circle"></div>
+          <div class="line"></div>
+          <div id="pb3" class="circle"></div>
+          <div class="line"></div>
+          <div id="pb4" class="circle"></div>
+          <div class="line"></div>
+          <div id="pb5" class="circle"></div>
+          <div class="line"></div>
+          <div id="pb6" class="circle"></div>
+          <div class="line"></div>
+          <div id="pb7" class="circle"></div>
+          </div>
+
+          <div class="question-page hidden">
+            <div class="words-container">
+              <p class="question-text"></p>
+              <p class="question-content"></p>
+            </div>
+            <div class="button-container">
+              <button id="a1"></button>
+              <button id="a2"></button>
+              <button id="a3"></button>
+              <button id="a4"></button>
+            </div>
+            <div class="notes-container"><p></p></div>
+          </div>
+
+          <div class="solution-page hidden">
+            <div class="words-container">
+              <p class="current-question"></p>
+              <p class="correctness"></p>
+              <p class="solution"></p>
+            </div>
+            <div class="button-container">
+              <button id="next">continue</b>
+            </div>
+          </div>
+
+
+        </div>
+        <div id="table-container">
+
+            <div class="table-header">
+                <h3>logical equivalences</h3>
+            </div>
+
+            <div class='logic-table'>
+
+                    <div class="row border-top">
+                        <div>!(p && q) = !p || !q</div>
+                        <div>De Morgan's laws</div>
+                    </div>
+                    <div class="row">
+                        <div>!(p || q) = !p && !q</div>
+                        <div></div>
+                    </div>
+                    <div class="row border-top">
+                        <div>p || (p && q) = p</div>
+                        <div>Absorption laws</div>
+                    </div>
+                    <div class="row">
+                        <div>p && (p || q) = p</div>
+                        <div></div>
+                    </div>
+                    <div class="row border-top">
+                        <div>p || q = q || p</div>
+                        <div>Commutative laws</div>
+                    </div>
+                    <div class="row">
+                        <div>p && q = q && p</div>
+                        <div></div>
+                    </div>
+                    <div class="row border-top">
+                        <div>(p || q) || r = p || (q || r)</div>
+                        <div>Associative laws</div>
+                    </div>
+                    <div class="row">
+                        <div>(p && q) && r = p && (q && r)</div>
+                        <div></div>
+                    </div>
+                    <div class="row border-top">
+                        <div>p || (q && r) = (p || q) && (p || r)</div>
+                        <div>Distributive laws</div>
+                    </div>
+                    <div class="row">
+                        <div>p && (q || r) = (p && q) || (p && r)</div>
+                        <div></div>
+                    </div>
+                    <div class="row border-top">
+                        <div>p || p = p</div>
+                        <div>Idempotent laws</div>
+                    </div>
+                    <div class="row">
+                        <div>p && p = p</div>
+                        <div></div>
+                    </div>
+                    <div class="row border-top">
+                        <div>p && true = p</div>
+                        <div>Identity laws</div>
+                    </div>
+                    <div class="row">
+                        <div>p || false = p</div>
+                        <div></div>
+                    </div>
+                    <div class="row border-top">
+                        <div>p || true = true</div>
+                        <div>Domination laws</div>
+                    </div>
+                    <div class="row">
+                        <div>p && false = false</div>
+                        <div></div>
+                    </div>
+                    <div class="row border-top">
+                        <div>p || !p = true</div>
+                        <div>Negation laws</div>
+                    </div>
+                    <div class="row">
+                        <div>p && !p = false</div>
+                        <div></div>
+                    </div>
+                    <div class="row border-top keep-padding">
+                        <div>!(!p) = p</div>
+                        <div>Double negation law</div>
+                    </div>
+
+            </div>
+
         </div>
     </main>
 

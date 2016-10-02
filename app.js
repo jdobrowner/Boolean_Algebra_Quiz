@@ -1,184 +1,204 @@
 //*-------------- call functions when document is loaded -----------------*
 
 $(function() {
-    setUpQuizToolsToggleButtons();
+    //setUpQuizToolsToggleButtons();
     beginQuiz();
     answerButtonHandlers();
 });
-
-//*--------- set up scratch paper and logic table toggle -------------*
-
-function setUpQuizToolsToggleButtons() {
-
-    $('#paper-header').click( function(event) {
-        toggleQuizTool($(this), quizApp.state.isPaperShowing);
-        quizApp.state.isPaperShowing = !quizApp.state.isPaperShowing;
-    });
-
-    $('#table-header').click( function(event) {
-        toggleQuizTool($(this), quizApp.state.isTableShowing);
-        quizApp.state.isTableShowing = !quizApp.state.isTableShowing;
-    });
-}
-
-function toggleQuizTool($button, isShowing) {
-    if (isShowing) {
-        $button.next().addClass('hidden');
-        $button.find('span').text('+');
-    }
-    else {
-        $button.next().removeClass('hidden');
-        $button.find('span').text('-');
-    }
-}
 
 
 //*---------- setup question page div and solution page div --------------*
 
 function beginQuiz() {
-$('#quiz').on('click', '#begin-button', function(event){
+    $('.quiz-container').on('click', '#begin-button', function(event) {
 
-  quizApp.state.page = 0;
-  var $quizDiv = $('#quiz');
-
-  $quizDiv.children().remove();
-  $quizDiv.append('<div id="question-page"></div>');
-  $quizDiv.append('<div id="solution-page" class="hidden"></div>');
-
-  var $qDiv = $('#question-page');
-  var $sDiv = $('#solution-page');
-
-  $qDiv.append('<p id="notes"></p>');
-  $qDiv.append('<p id="question-text"></p>');
-  $qDiv.append('<p id="question-content"></p>');
-  $qDiv.append('<button id="a1" class="answer"></button>');
-  $qDiv.append('<button id="a2" class="answer"></button>');
-  $qDiv.append('<button id="a3" class="answer"></button>');
-  $qDiv.append('<button id="a4" class="answer"></button>');
-
-  $sDiv.append('<p id="answered"></p>');
-  $sDiv.append('<p id="solution"></p>');
-  $sDiv.append('<button id="next">next question</button>');
-
-  addQuestion();
-  });
+        quizApp.state.page = 0;
+        var $landingPage = $('.landing-and-score-page');
+        $landingPage.addClass('hidden');
+        $landingPage.find('.words-container').children().remove();
+        $landingPage.find('.button-container').children().remove();
+        $('.progress-bar').removeClass('hidden');
+        $('.quiz-container').removeClass('space-around');
+        addQuestion();
+    });
 }
 
 
 //*--------------- fill question page with content ---------------------*
 
 function addQuestion() {
-  $('#solution-page').addClass('hidden');
-  $('#question-page').removeClass('hidden');
+    $('.solution-page').addClass('hidden');
+    $('.question-page').removeClass('hidden');
 
-  var qNum = quizApp.state.questionNum;
+    var qNum = quizApp.state.questionNum;
 
-  $('#notes').text(quizApp.questionsNotes[qNum]);
-  $('#question-text').text(quizApp.questionsList[qNum]);
-  $('#question-content').text(quizApp.questionsContentList[qNum]);
-  $('#a1').text(quizApp.choicesList[qNum][0]);
-  $('#a2').text(quizApp.choicesList[qNum][1]);
-  $('#a3').text(quizApp.choicesList[qNum][2]);
-  $('#a4').text(quizApp.choicesList[qNum][3]);
+    $('.notes-container').text(quizApp.questionsNotes[qNum]);
+    $('.question-text').text(quizApp.questionsList[qNum]);
+    $('.question-content').html(withVariables(quizApp.questionsContentList[qNum]));
+    $('#a1').text(quizApp.choicesList[qNum][0]);
+    $('#a2').text(quizApp.choicesList[qNum][1]);
+    $('#a3').text(quizApp.choicesList[qNum][2]);
+    $('#a4').text(quizApp.choicesList[qNum][3]);
 
-  quizApp.state.page++;
+    quizApp.state.page++;
 }
 
 //*----------- fill solution page with content -------------------------*
 
 function addSolution() {
-  $('#question-page').addClass('hidden');
-  $('#solution-page').removeClass('hidden');
+    $('.question-page').addClass('hidden');
+    $('.solution-page').removeClass('hidden');
 
-  var qNum = quizApp.state.questionNum;
+    var qNum = quizApp.state.questionNum;
 
-  $('#answered').text(quizApp.lastAnswerWas ? 'correct' : 'incorrect');
-  $('#solution').text(quizApp.solutionText[qNum]);
+    $('.correctness').text(quizApp.lastAnswerWas ? 'correct' : 'incorrect');
+    $('.solution').text(quizApp.solutionText[qNum]);
 
-  quizApp.state.page++;
-  quizApp.state.questionNum++;
+    quizApp.state.page++;
+    quizApp.state.questionNum++;
 }
 
 //*------------ add answer button event handlers -----------------------*
 
 function answerButtonHandlers() {
 
-  $('#quiz').on('click', '#a1', function(event) {
-    console.log('a1 clicked');
-    determineCorrectness(1);
-    switchPages();
-  });
-  $('#quiz').on('click', '#a2', function(event) {
-    determineCorrectness(2);
-    switchPages();
-  });
-  $('#quiz').on('click', '#a3', function(event) {
-    determineCorrectness(3);
-    switchPages();
-  });
-  $('#quiz').on('click', '#a4', function(event) {
-    determineCorrectness(4);
-    switchPages();
-  });
+    $('.quiz-container').on('click', '#a1', function(event) {
+        //console.log('a1 clicked');
+        determineCorrectness(1);
+        switchPages();
+    });
+    $('.quiz-container').on('click', '#a2', function(event) {
+        determineCorrectness(2);
+        switchPages();
+    });
+    $('.quiz-container').on('click', '#a3', function(event) {
+        determineCorrectness(3);
+        switchPages();
+    });
+    $('.quiz-container').on('click', '#a4', function(event) {
+        determineCorrectness(4);
+        switchPages();
+    });
 
-  //*------- next question and retake quiz buttons --------*
+    //*------- next question and retake quiz buttons --------*
 
-  $('#quiz').on('click', '#next', function(event) {
-    switchPages();
-  });
-  $('#quiz').on('click', '#retake', function(event) {
-    resetQuiz();
-  });
+    $('.quiz-container').on('click', '#next', function(event) {
+        switchPages();
+    });
+    $('.quiz-container').on('click', '#retake', function(event) {
+        resetQuiz();
+    });
 
 }
 
 //*---------------- determine correctness of choice -------------------*
 
 function determineCorrectness(n) {
-  var qNum = quizApp.state.questionNum;
-  quizApp.answersChosen.push(n);
+    var qNum = quizApp.state.questionNum;
+    quizApp.answersChosen.push(n);
 
-  if (quizApp.answersChosen[qNum] === quizApp.answersList[qNum]) {
-    quizApp.lastAnswerWas = true;
-    quizApp.state.points++;
+    if (quizApp.answersChosen[qNum] === quizApp.answersList[qNum]) {
+        quizApp.lastAnswerWas = true;
+        quizApp.state.points++;
+    } else {
+        quizApp.lastAnswerWas = false;
+    }
 
-    console.log('points = ' + quizApp.state.points);
-  }
-  else {
-    quizApp.lastAnswerWas = false;
-  }
+    colorProgressBar(qNum + 1, quizApp.lastAnswerWas);
+}
+
+//*------------------- add color to progress bar ----------------------*
+
+function colorProgressBar(n, correct) {
+    var color = correct ? 'green' : 'red';
+
+    switch (n) {
+        case 1:
+            $('#pb1').addClass(color);
+            break;
+        case 2:
+            $('#pb2').addClass(color);
+            break;
+        case 3:
+            $('#pb3').addClass(color);
+            break;
+        case 4:
+            $('#pb4').addClass(color);
+            break;
+        case 5:
+            $('#pb5').addClass(color);
+            break;
+        case 6:
+            $('#pb6').addClass(color);
+            break;
+        case 7:
+            $('#pb7').addClass(color);
+            break;
+        default:
+          break;
+    }
 }
 
 //*----------- switch between questions and solutions pages -----------*
 
 function switchPages() {
-  if (quizApp.state.page === 20) finalPage();
-  else quizApp.state.page % 2 === 0 ? addQuestion() : addSolution();
+    if (quizApp.state.page === 20) finalPage();
+    else quizApp.state.page % 2 === 0 ? addQuestion() : addSolution();
 }
 
 //*---------------------- set up final page --------------------------*
 
 function finalPage() {
-  $('#solution-page').addClass('hidden');
-  var $quiz = $('#quiz');
+    $('.solution-page').addClass('hidden');
+    $('.progress-bar').addClass('hidden');
+    $('.quiz-container').addClass('space-around');
 
-  var addText = '<div id="final-page"><h2>Congradulations! You are ';
-  addText += quizApp.howGood[quizApp.state.points] + ' at logic.</h2>';
-  addText += '</br><p>Your score:  ' + quizApp.state.points + ' / 10</p>';
-  addText += '<button id="retake" class="begin-quiz">try again</button></div>';
-  $quiz.append(addText);
+    var $score = $('.landing-and-score-page');
+    $score.removeClass('hidden');
+
+    var addText = '<h2><span class="huge">';
+    addText += quizApp.howGood[quizApp.state.points] > 4 ? 'Congradulations!</span></br>You ' : 'Sorry,</span></br>but you '
+    addText += 'are <span class="code">' + quizApp.howGood[quizApp.state.points] + '</span> at logic.</h2>';
+    addText += '<p class="final-score">Your score:  <span class="code">' + quizApp.state.points + '</span> / 10</p>';
+    var addButton = '<button id="retake" class="begin-quiz">try again</button>';
+    $score.children('.words-container').html(addText);
+    $score.children('.button-container').html(addButton);
 }
 
 //*------------------- reset state and commence quiz ---------------------*
 
 function resetQuiz() {
-  quizApp.state.page = 0;
-  quizApp.state.points = 0;
-  quizApp.state.questionNum = 0;
-  quizApp.answersChosen = [];
+    quizApp.state.page = 0;
+    quizApp.state.points = 0;
+    quizApp.state.questionNum = 0;
+    quizApp.answersChosen = [];
 
-  $('#final-page').remove();
-  addQuestion();
+    $('.landing-and-score-page').addClass('hidden');
+    $('.progress-bar').removeClass('hidden');
+    $('#pb1').removeClass('red green');
+    $('#pb2').removeClass('red green');
+    $('#pb3').removeClass('red green');
+    $('#pb4').removeClass('red green');
+    $('#pb5').removeClass('red green');
+    $('#pb6').removeClass('red green');
+    $('#pb7').removeClass('red green');
+    $('.quiz-container').removeClass('space-around');
+    addQuestion();
+}
+
+//*-------- add variables class to all variables in question content -------*
+
+function withVariables(questionString) {
+    var text = '';
+    for (var i = 0; i < questionString.length; i++) {
+        var char = questionString.charAt(i);
+        if (char == 'a' || char == 'b' || char == 'c' || char == 'd') {
+            text += "<span class='variable'>" + questionString[i] + "</span>";
+        } else {
+            text += questionString[i];
+        }
+    }
+    return text;
 }
 
 
@@ -188,64 +208,64 @@ var quizApp = {
 
     //*------------- state of the landing page ---------------*
 
-    state : {
+    state: {
         // landing page = (-1), question 1 = (0), solution 1 = (1) ...
         // solution 10 = (19), results page = (20)
-        page : -1,
+        page: -1,
         // 1 point for each correct answer
-        points : 0,
-        questionNum : 0,
-        isPaperShowing : true,
-        isTableShowing : true,
-        lastAnswerWas : true
+        points: 0,
+        questionNum: 0,
+        isPaperShowing: true,
+        isTableShowing: true,
+        lastAnswerWas: true
     },
 
     //*------------ app content ----------------------------*
 
-    questionsNotes : [
-      '// a, b, c, and d are unknown boolean variables',
-      '// a, b, c, and d are unknown boolean variables',
-      '// a, b, and c are unknown boolean variables',
-      '// a, b, c, and d are unknown boolean variables',
-      '// a and b are unknown boolean variables',
-      '// a and b are unknown boolean variables',
-      '// a and b are unknown boolean variables',
-      '// a and b are unknown boolean variables',
-      '// a and b are unknown boolean variables',
-      '// a and b are unknown boolean variables',
+    questionsNotes: [
+        '// a, b, c, and d are unknown boolean variables',
+        '// a, b, c, and d are unknown boolean variables',
+        '// a, b, and c are unknown boolean variables',
+        '// a, b, c, and d are unknown boolean variables',
+        '// a and b are unknown boolean variables',
+        '// a and b are unknown boolean variables',
+        '// a and b are unknown boolean variables',
+        '// a and b are unknown boolean variables',
+        '// a and b are unknown boolean variables',
+        '// a and b are unknown boolean variables',
     ],
 
-    questionsList : [
-        ['Which is a logical equivalent to:'],
-        ['Which is a logical equivalent to:'],
-        ['Which is a logical equivalent to:'],
-        ['Which is a logical equivalent to:'],
-        ['Which is a logical equivalent to:'],
-        ['Which is a logical equivalent to:'],
-        ['What is the value of c?'],
-        ['What is the value of c?'],
-        ['What is the value of c?'],
-        ['What is the value of c?']
+    questionsList: [
+        'Choose the logical equivalent to:',
+        'Choose the logical equivalent to:',
+        'Choose the logical equivalent to:',
+        'Choose the logical equivalent to:',
+        'Choose the logical equivalent to:',
+        'Choose the logical equivalent to:',
+        'What is the value of c?',
+        'What is the value of c?',
+        'What is the value of c?',
+        'What is the value of c?'
     ],
 
-    questionsContentList : [
-        ['( a || ( a && b ) ) && ( c && ( c || d ) )'],
-        ['!( a && b ) || ( !c || !d )'],
-        ['( a || b ) || !( a && c )'],
-        ['!( !a && !b && !c && !d )'],
-        ['a || (!a && b)'],
-        ['a || (b || !a)'],
-        ['var c = a == b ? a && b : a || b;'],
-        ['var c = a || b ? a : b;'],
-        ['var c = a ? a : b;'],
-        ['var c = a && b ? a : b;']
+    questionsContentList: [
+        '( a || ( a && b )) && ( c && ( c || d ))',
+        '!( a && b ) || ( !c || !d )',
+        '( a || b ) || !( a && c )',
+        '!( !a && !b && !c && !d )',
+        'a || ( !a && b )',
+        'a || ( b || !a )',
+        'var c = a == b ? a && b : a || b;',
+        'var c = a || b ? a : b;',
+        'var c = a ? a : b;',
+        'var c = a && b ? a : b;'
     ],
 
-    choicesList : [
+    choicesList: [
         ['a && c', 'a && d', 'b && c', 'b && d'],
-        ['a && b && c && d', '!( a && b && c && d )', '!a || !b || c || d', '!( a || b || c || d )'],
+        ['a && b && c && d', '!(a && b && c && d)', '!a || !b || c || d', '!(a || b || c || d)'],
         ['b && c', '!b && c', 'b || !c', '!b || c'],
-        ['a || b || c || d', 'a && b && c && d', '!a || !b || !c || !d', '!( a || b || c || d )'],
+        ['a || b || c || d', 'a && b && c && d', '!a || !b || !c || !d', '!(a || b || c || d)'],
         ['a || b', 'a && b', 'false', 'true'],
         ['a', 'b', 'a || b', 'true'],
         ['true', 'false', 'a && b', 'a || b'],
@@ -254,9 +274,9 @@ var quizApp = {
         ['a', 'b', 'a || b', 'a && b'],
     ],
 
-    answersList : [1, 2, 3, 1, 1, 4, 4, 3, 3, 2],
+    answersList: [1, 2, 3, 1, 1, 4, 4, 3, 3, 2],
 
-    solutionText : ['( a ) && ( c ) by Absorption laws',
+    solutionText: ['( a ) && ( c ) by Absorption laws',
         "solution",
         "solution",
         "solution",
@@ -268,9 +288,9 @@ var quizApp = {
         "solution"
     ],
 
-    answersChosen : [],
+    answersChosen: [],
 
-    howGood : [
+    howGood: [
         'godawful',
         'pathetic',
         'pathetic',
