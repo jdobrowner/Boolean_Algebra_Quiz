@@ -6,6 +6,11 @@ Medium Blue: #6BA2B8
 Dark Blue: #007598
 */
 
+body, main, .quiz-container, .question-page, .solution-page, .landing-and-score-page,
+.words-container, .button-container, #table-container, .table-header, .row, .progress-bar {
+  display: -webkit-box;
+}
+
 html, body {
   height: 100%;
 }
@@ -193,7 +198,6 @@ button:hover {
 .question-text {
 
 }
-
 
 
 
