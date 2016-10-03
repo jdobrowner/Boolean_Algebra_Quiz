@@ -11,8 +11,8 @@ $(function() {
 
 function beginQuiz() {
     $('.quiz-container').on('click', '#begin-button', function(event) {
-
         quizApp.state.page = 0;
+        quizApp.randomQuestions = randomizeQuestions();
         var $landingPage = $('.landing-and-score-page');
         $landingPage.addClass('hidden');
         $landingPage.find('.words-container').children().remove();
@@ -31,14 +31,15 @@ function addQuestion() {
     $('.question-page').removeClass('hidden');
 
     var qNum = quizApp.state.questionNum;
+    var randNum = quizApp.randomQuestions[qNum];
 
-    $('.notes-container').text(quizApp.questionsNotes[qNum]);
-    $('.question-text').text(quizApp.questionsList[qNum]);
-    $('.question-content').html(withVariables(quizApp.questionsContentList[qNum]));
-    $('#a1').text(quizApp.choicesList[qNum][0]);
-    $('#a2').text(quizApp.choicesList[qNum][1]);
-    $('#a3').text(quizApp.choicesList[qNum][2]);
-    $('#a4').text(quizApp.choicesList[qNum][3]);
+    $('.notes-container').text(quizApp.questionsNotes[randNum]);
+    $('.question-text').text(quizApp.questionsList[randNum]);
+    $('.question-content').html(withVariables(quizApp.questionsContentList[randNum]));
+    $('#a1').text(quizApp.choicesList[randNum][0]);
+    $('#a2').text(quizApp.choicesList[randNum][1]);
+    $('#a3').text(quizApp.choicesList[randNum][2]);
+    $('#a4').text(quizApp.choicesList[randNum][3]);
 
     quizApp.state.page++;
 }
@@ -50,9 +51,15 @@ function addSolution() {
     $('.solution-page').removeClass('hidden');
 
     var qNum = quizApp.state.questionNum;
+    var randNum = quizApp.randomQuestions[qNum];
+    var $correctness = $('.correctness');
+    var correct = quizApp.lastAnswerWas;
 
-    $('.correctness').text(quizApp.lastAnswerWas ? 'correct' : 'incorrect');
-    $('.solution').text(quizApp.solutionText[qNum]);
+    $correctness.text(correct ? 'Correct' : 'Incorrect');
+    $correctness.removeClass(!correct ? 'textGreen' : 'textRed');
+    $correctness.addClass(correct ? 'textGreen' : 'textRed');
+
+    $('.solution').html(quizApp.solutionText[randNum]);
 
     quizApp.state.page++;
     quizApp.state.questionNum++;
@@ -142,7 +149,7 @@ function colorProgressBar(n, correct) {
 //*----------- switch between questions and solutions pages -----------*
 
 function switchPages() {
-    if (quizApp.state.page === 20) finalPage();
+    if (quizApp.state.page === 14) finalPage();
     else quizApp.state.page % 2 === 0 ? addQuestion() : addSolution();
 }
 
@@ -158,8 +165,8 @@ function finalPage() {
 
     var addText = '<h2><span class="huge">';
     addText += quizApp.howGood[quizApp.state.points] > 4 ? 'Congradulations!</span></br>You ' : 'Sorry,</span></br>but you '
-    addText += 'are <span class="code">' + quizApp.howGood[quizApp.state.points] + '</span> at logic.</h2>';
-    addText += '<p class="final-score">Your score:  <span class="code">' + quizApp.state.points + '</span> / 10</p>';
+    addText += 'are <span class="code variable">' + quizApp.howGood[quizApp.state.points] + '</span> at logic.</h2>';
+    addText += '<p class="final-score">Your score:  <span class="code variable">' + quizApp.state.points + '</span> / 7</p>';
     var addButton = '<button id="retake" class="begin-quiz">try again</button>';
     $score.children('.words-container').html(addText);
     $score.children('.button-container').html(addButton);
@@ -172,6 +179,7 @@ function resetQuiz() {
     quizApp.state.points = 0;
     quizApp.state.questionNum = 0;
     quizApp.answersChosen = [];
+    quizApp.randomQuestions = randomizeQuestions();
 
     $('.landing-and-score-page').addClass('hidden');
     $('.progress-bar').removeClass('hidden');
@@ -192,13 +200,25 @@ function withVariables(questionString) {
     var text = '';
     for (var i = 0; i < questionString.length; i++) {
         var char = questionString.charAt(i);
-        if (char == 'a' || char == 'b' || char == 'c' || char == 'd') {
+        if (questionString.charAt(i+1) !== 'r' && (char == 'a' || char == 'b' || char == 'c' || char == 'd')) {
             text += "<span class='variable'>" + questionString[i] + "</span>";
         } else {
             text += questionString[i];
         }
     }
     return text;
+}
+
+//*---------------------- choose 7 random questions -----------------------*
+
+function randomizeQuestions() {
+  var randArray = [];
+  for (var i = 0; randArray.length < 7; i++) {
+    var rand = Math.random() * 10;
+    rand = Math.floor(rand);
+    if (!randArray.includes(rand)) randArray.push(rand);
+  }
+  return randArray;
 }
 
 
@@ -276,16 +296,76 @@ var quizApp = {
 
     answersList: [1, 2, 3, 1, 1, 4, 4, 3, 3, 2],
 
-    solutionText: ['( a ) && ( c ) by Absorption laws',
-        "solution",
-        "solution",
-        "solution",
-        "solution",
-        "solution",
-        "solution",
-        "solution",
-        "solution",
-        "solution"
+    solutionText: ['<table><tr><td>Solution:</u></tr></td>' +
+        '<tr><td><span class="code">( a || ( a && b )) && ( c && ( c || d ))</span></td></tr>' +
+        '<tr><td><span class="code">= ( a ) && ( c ) </span>by Absorption law</td></tr>' + '<tr><td>\t<span class="code">= a && c</span></td></tr>' + '</table>',
+
+        '<table><tr><td>Solution:</td></tr>'
+        +'<tr><td><span class="code">!( a && b ) || ( !c || !d )</span></td></tr>'
+        + '<tr><td><span class="code">= !(a && b) || !(c && d) </span>by De Morgan\'s laws</td></tr>'
+        + '<tr><td><span class="code">= !(( a && b ) && ( c && d )) </span>by De Morgan\'s law</td></tr>'
+        + '<tr><td><span class="code">= !( a && b && c && d ) </span>by Associative law</td></tr>' +'</table>',
+
+        '<table><tr><td>Solution:</td></tr>'
+        +'<tr><td><span class="code">( a || b ) || !( a && c )</span></td></tr>'
+        + '<tr><td><span class="code">= ( a || b ) || ( !a || !c ) </span>by De Morgan\'s laws</td></tr>'
+        + '<tr><td><span class="code">= ( a || !a ) || ( b || !c ) </span>Associative law</td></tr>'
+        + '<tr><td><span class="code">= true || ( b || !c ) </span>by Negation law</td></tr>'
+        + '<tr><td><span class="code">= true || ( b || !c ) </span>by Identity law</td></tr>' +'</table>',
+
+        '<table><tr><td>Solution:</td></tr>'
+        +'<tr><td><span class="code">!( !a && !b && !c && !d )</span></td></tr>'
+        + '<tr><td><span class="code">= !!( a || b || d || c ) </span>by De Morgan\'s law</td></tr>'
+        + '<tr><td><span class="code">= a || b || c || d </span>by Double Negation law</td></tr>' +'</table>',
+
+        '<table><tr><td>Solution:</td></tr>'
+        +'<tr><td><span class="code">a || (!a && b)</span></td></tr>'
+        + '<tr><td><span class="code">= (a || !a) && (a || b) </span>by Distributive law</td></tr>'
+        + '<tr><td><span class="code">= true && (a || b) </span>by Negation law</td></tr>'
+        + '<tr><td><span class="code">= a || b </span>by Identity law</td></tr>' +'</table>',
+
+        '<table><tr><td>Solution:</td></tr>'
+        +'<tr><td><span class="code">a || (b || !a)</span></td></tr>'
+        + '<tr><td><span class="code">= a || (!a || b) </span>by Commutative law</td></tr>'
+        + '<tr><td><span class="code">= (a || !a) || b </span>Associative law</td></tr>'
+        + '<tr><td><span class="code">= true || b </span>by Negation law</td></tr>'
+        + '<tr><td><span class="code">= true </span>by Domination law</td></tr>' +'</table>',
+
+        '<table><tr><td>Solution:</td></tr><span class="code">'
+        + '<tr><td>a</td><td>b</td><td>a == b</td><td>c</td></tr>'
+        + '<tr><td>true</td><td>true</td><td>true</td><td>a && b = true</td></tr>'
+        + '<tr><td>true</td><td>false</td><td>false</td><td>a || b = true</td></tr>'
+        + '<tr><td>false</td><td>true</td><td>false</td><td>a || b = true</td></tr>'
+        + '<tr><td>false</td><td>false</td><td>true</td><td>a && b = false</td></tr>'
+        + '</span></table>'
+        + '<p>thus, <span class="code"> c = a || b</span></p>',
+
+        '<table><tr><td>Solution:</td></tr><span class="code">'
+        + '<tr><td>a</td><td>b</td><td>a || b</td><td>c</td></tr>'
+        + '<tr><td>true</td><td>true</td><td>true</td><td>a = true</td></tr>'
+        + '<tr><td>true</td><td>false</td><td>true</td><td>a = true</td></tr>'
+        + '<tr><td>false</td><td>true</td><td>true</td><td>a = false</td></tr>'
+        + '<tr><td>false</td><td>false</td><td>false</td><td>b = false</td></tr>'
+        + '</span></table>'
+        + '<p>thus, <span class="code"> c = a</span></p>',
+
+        '<table><tr><td>Solution:</td></tr><span class="code">'
+        + '<tr><td>a</td><td>b</td><td>c</td></tr>'
+        + '<tr><td>true</td><td>true</td><td>a = true</td></tr>'
+        + '<tr><td>true</td><td>false</td><td>a = true</td></tr>'
+        + '<tr><td>false</td><td>true</td><td>b = true</td></tr>'
+        + '<tr><td>false</td><td>false</td><td>b = false</td></tr>'
+        + '</span></table>'
+        + '<p>thus, <span class="code"> c = a || b</span></p>',
+
+        '<table><tr><td>Solution:</td></tr><span class="code">'
+        + '<tr><td>a</td><td>b</td><td>a && b</td><td>c</td></tr>'
+        + '<tr><td>true</td><td>true</td><td>true</td><td>a = true</td></tr>'
+        + '<tr><td>true</td><td>false</td><td>false</td><td>b = false</td></tr>'
+        + '<tr><td>false</td><td>true</td><td>false</td><td>b = true</td></tr>'
+        + '<tr><td>false</td><td>false</td><td>false</td><td>b = false</td></tr>'
+        + '</span></table>'
+        + '<p>thus, <span class="code"> c = b</span></p>'
     ],
 
     answersChosen: [],
@@ -293,12 +373,8 @@ var quizApp = {
     howGood: [
         'godawful',
         'pathetic',
-        'pathetic',
-        'lousy',
         'lousy',
         'unremarkable',
-        'unremarkable',
-        'competent',
         'competent',
         'superb',
         'phenomenal'

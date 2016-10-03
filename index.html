@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Logic Quiz</title>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono:700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="reset.css">
     <link rel="stylesheet" type="text/css" href="main.css">
     <link rel="stylesheet" media="(max-width: 1100px)" href="main.css" />
@@ -57,9 +58,8 @@
 
           <div class="solution-page hidden">
             <div class="words-container">
-              <p class="current-question"></p>
               <p class="correctness"></p>
-              <p class="solution"></p>
+              <div class="solution"></div>
             </div>
             <div class="button-container">
               <button id="next">continue</b>
@@ -71,22 +71,20 @@
         <div id="table-container">
 
             <div class="table-header">
-                <h3>logical equivalences</h3>
+                <h3>Logical Equivalences</h3>
             </div>
 
             <div class='logic-table'>
 
                     <div class="row border-top">
-                        <div><p>!(p && q) = !p || !q</p></div>
-                        <div><p>De Morgan's laws</p></div>
-                    </div>
-                    <div class="row">
-                        <div><p>!(p || q) = !p && !q</p></div>
-                        <div><p> </p></div>
+                        <div>De Morgan's laws</div>
+                        <div>!(p && q) = !p || !q</div>
+                        <div>!(p || q) = !p && !q</div>
+
                     </div>
                     <div class="row border-top">
-                        <div><p>p || (p && q) = p</p></div>
-                        <div><p>Absorption laws</p></div>
+                        <div>p || (p && q) = p</div>
+                        <div>Absorption laws</div>
                     </div>
                     <div class="row">
                         <div>p && (p || q) = p</div>
