@@ -102,9 +102,10 @@ function answerButtonHandlers() {
 
 function determineCorrectness(n) {
     var qNum = quizApp.state.questionNum;
+    var randNum = quizApp.randomQuestions[qNum];
     quizApp.answersChosen.push(n);
 
-    if (quizApp.answersChosen[qNum] === quizApp.answersList[qNum]) {
+    if (quizApp.answersChosen[qNum] === quizApp.answersList[randNum]) {
         quizApp.lastAnswerWas = true;
         quizApp.state.points++;
     } else {
