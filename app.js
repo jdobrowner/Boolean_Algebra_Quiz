@@ -312,7 +312,7 @@ var quizApp = {
         + '<tr><td><span class="code">= ( a || b ) || ( !a || !c ) </span>by De Morgan\'s laws</td></tr>'
         + '<tr><td><span class="code">= ( a || !a ) || ( b || !c ) </span>Associative law</td></tr>'
         + '<tr><td><span class="code">= true || ( b || !c ) </span>by Negation law</td></tr>'
-        + '<tr><td><span class="code">= true || ( b || !c ) </span>by Identity law</td></tr>' +'</table>',
+        + '<tr><td><span class="code">= b || !c </span>by Identity law</td></tr>' +'</table>',
 
         '<table><tr><td>Solution:</td></tr>'
         +'<tr><td><span class="code">!( !a && !b && !c && !d )</span></td></tr>'
