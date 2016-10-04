@@ -165,7 +165,7 @@ function finalPage() {
     $score.removeClass('hidden');
 
     var addText = '<h2><span class="huge">';
-    addText += quizApp.howGood[quizApp.state.points] > 4 ? 'Congradulations!</span></br>You ' : 'Sorry,</span></br>but you '
+    addText += quizApp.state.points > 4 ? 'Congradulations!</span></br>You ' : 'Sorry,</span></br>but you '
     addText += 'are <span class="code variable">' + quizApp.howGood[quizApp.state.points] + '</span> at logic.</h2>';
     addText += '<p class="final-score">Your score:  <span class="code variable">' + quizApp.state.points + '</span> / 7</p>';
     var addButton = '<button id="retake" class="begin-quiz">try again</button>';
@@ -374,6 +374,7 @@ var quizApp = {
     howGood: [
         'godawful',
         'pathetic',
+        'lousy',
         'lousy',
         'unremarkable',
         'competent',

@@ -7,61 +7,63 @@
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="reset.css">
     <link rel="stylesheet" type="text/css" href="main.css">
-    <link rel="stylesheet" media="(max-width: 1300px)" href="main.css" />
 </head>
 
 <body>
     <main>
         <div class="quiz-container">
-          <div class="landing-and-score-page space-around">
-            <div class="words-container">
-              <h1> So You Think You're Good At <span class="code">Logic</span>?</br>Let's Find Out.</h1>
-                <p>Before taking this quiz you should be familar with <a href="https://en.wikipedia.org/wiki/Logical_equivalence" target="_blank">logical equivalences</a>, <a href="https://en.wikipedia.org/wiki/Truth_table" target="_blank">truth tables</a>,
-                    and the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator" target="_blank">conditional operator</a>.</br></br>The syntax is that of most programming languages.</br>
+            <div class="landing-and-score-page space-around">
+                <div class="words-container">
+                    <h1> So You Think You're Good At <span class="code">Logic</span>?</br>Let's Find Out.</h1>
+                    <p>Before taking this quiz you should be familar with <a href="https://en.wikipedia.org/wiki/Logical_equivalence" target="_blank">logical equivalences</a>, <a href="https://en.wikipedia.org/wiki/Truth_table" target="_blank">truth tables</a>,
+                        and the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator" target="_blank">conditional operator</a>.</br>
+                        </br>The syntax is that of most programming languages.</br>
+                </div>
+                <div class="button-container">
+                    <button id="begin-button" class="begin-quiz" data-id="quiz">begin quiz</button>
+                </div>
+            </div>
 
+            <div class="progress-bar hidden">
+                <div></div>
+                <div id="pb1" class="circle"></div>
+                <div class="line"></div>
+                <div id="pb2" class="circle"></div>
+                <div class="line"></div>
+                <div id="pb3" class="circle"></div>
+                <div class="line"></div>
+                <div id="pb4" class="circle"></div>
+                <div class="line"></div>
+                <div id="pb5" class="circle"></div>
+                <div class="line"></div>
+                <div id="pb6" class="circle"></div>
+                <div class="line"></div>
+                <div id="pb7" class="circle"></div>
             </div>
-            <div class="button-container">
-                <button id="begin-button" class="begin-quiz" data-id="quiz">begin quiz</button>
-            </div>
-          </div>
 
-          <div class="progress-bar hidden"><div></div>
-          <div id="pb1" class="circle"></div>
-          <div class="line"></div>
-          <div id="pb2" class="circle"></div>
-          <div class="line"></div>
-          <div id="pb3" class="circle"></div>
-          <div class="line"></div>
-          <div id="pb4" class="circle"></div>
-          <div class="line"></div>
-          <div id="pb5" class="circle"></div>
-          <div class="line"></div>
-          <div id="pb6" class="circle"></div>
-          <div class="line"></div>
-          <div id="pb7" class="circle"></div>
-          </div>
+            <div class="question-page hidden">
+                <div class="words-container">
+                    <p class="question-text"></p>
+                    <p class="question-content"></p>
+                </div>
+                <div class="button-container">
+                    <button id="a1"></button>
+                    <button id="a2"></button>
+                    <button id="a3"></button>
+                    <button id="a4"></button>
+                </div>
+                <div class="notes-container">
+                    <p></p>
+                </div>
+            </div>
 
-          <div class="question-page hidden">
-            <div class="words-container">
-              <p class="question-text"></p>
-              <p class="question-content"></p>
-            </div>
-            <div class="button-container">
-              <button id="a1"></button>
-              <button id="a2"></button>
-              <button id="a3"></button>
-              <button id="a4"></button>
-            </div>
-            <div class="notes-container"><p></p></div>
-          </div>
-
-          <div class="solution-page hidden">
-            <div class="words-container">
-              <p class="correctness"></p>
-              <div class="solution"></div>
-            </div>
-            <div class="button-container">
-              <button id="next">continue</b>
+            <div class="solution-page hidden">
+                <div class="words-container">
+                    <p class="correctness"></p>
+                    <div class="solution"></div>
+                </div>
+                <div class="button-container">
+                    <button id="next">continue</b>
             </div>
           </div>
 
@@ -155,11 +157,8 @@
                           <p>p && !p = false</p>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
     </main>
 
