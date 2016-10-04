@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <title>Logic Quiz</title>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Space+Mono:700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="reset.css">
     <link rel="stylesheet" type="text/css" href="main.css">
-    <link rel="stylesheet" media="(max-width: 1100px)" href="main.css" />
+    <link rel="stylesheet" media="(max-width: 1300px)" href="main.css" />
 </head>
 
 <body>
@@ -75,81 +74,89 @@
             </div>
 
             <div class='logic-table'>
+                <div class="logic-block">
+                    <div class="row top-radius">
+                        <div><h4>De Morgan's laws</h4></div>
+                        <div>
+                          <p>!(p && q) = !p || !q</p>
+                          <p>!(p || q) = !p && !q</p>
+                        </div>
+                    </div>
 
-                    <div class="row border-top">
-                        <div>De Morgan's laws</div>
-                        <div>!(p && q) = !p || !q</div>
-                        <div>!(p || q) = !p && !q</div>
+                    <div class="row">
+                        <div><h4>Absorption laws</h4></div>
+                        <div>
+                          <p>p || (p && q) = p</p>
+                          <p>p && (p || q) = p</p>
+                        </div>
+                    </div>
 
-                    </div>
-                    <div class="row border-top">
-                        <div>p || (p && q) = p</div>
-                        <div>Absorption laws</div>
-                    </div>
                     <div class="row">
-                        <div>p && (p || q) = p</div>
-                        <div></div>
+                        <div><h4>Commutative laws</h4></div>
+                        <div>
+                          <p>p || q = q || p</p>
+                          <p>p && q = q && p</p>
+                        </div>
                     </div>
-                    <div class="row border-top">
-                        <div>p || q = q || p</div>
-                        <div>Commutative laws</div>
-                    </div>
+
                     <div class="row">
-                        <div>p && q = q && p</div>
-                        <div></div>
+                        <div><h4>Associative laws</h4></div>
+                        <div>
+                          <p>(p || q) || r = p || (q || r)</p>
+                          <p>(p && q) && r = p && (q && r)</p>
+                        </div>
                     </div>
-                    <div class="row border-top">
-                        <div>(p || q) || r = p || (q || r)</div>
-                        <div>Associative laws</div>
+
+                    <div class="row change-margin">
+                        <div><h4>Distributive laws</h4></div>
+                        <div>
+                          <p class="smaller">p || (q && r) = (p || q) && (p || r)</p>
+                          <p class="smaller">p && (q || r) = (p && q) || (p && r)</p>
+                        </div>
                     </div>
+                </div>
+                <div class="logic-block">
+                    <div class="row top-right-border">
+                        <div><h4>Idempotent laws</h4></div>
+                        <div>
+                          <p>p || p = p</p>
+                          <p>p && p = p</p>
+                        </div>
+                    </div>
+
                     <div class="row">
-                        <div>(p && q) && r = p && (q && r)</div>
-                        <div></div>
+                        <div><h4>Double Negation law</h4></div>
+                        <div>
+                          <p>!(!p) = p</p>
+                        </div>
                     </div>
-                    <div class="row border-top">
-                        <div>p || (q && r) = (p || q) && (p || r)</div>
-                        <div>Distributive laws</div>
-                    </div>
+
                     <div class="row">
-                        <div>p && (q || r) = (p && q) || (p && r)</div>
-                        <div></div>
+                        <div><h4>Domination laws</h4></div>
+                        <div>
+                          <p>p || true = true</p>
+                          <p>p && false = false</p>
+                        </div>
                     </div>
-                    <div class="row border-top">
-                        <div>p || p = p</div>
-                        <div>Idempotent laws</div>
-                    </div>
+
+
                     <div class="row">
-                        <div>p && p = p</div>
-                        <div></div>
+                        <div><h4>Identity laws</h4></div>
+                        <div>
+                          <p>p && true = p</p>
+                          <p>p || false = p</p>
+                        </div>
                     </div>
-                    <div class="row border-top">
-                        <div>p && true = p</div>
-                        <div>Identity laws</div>
+
+                    <div class="row no-margin">
+                        <div><h4>Negation laws</h4></div>
+                        <div>
+                          <p>p || !p = true</p>
+                          <p>p && !p = false</p>
+                        </div>
                     </div>
-                    <div class="row">
-                        <div>p || false = p</div>
-                        <div></div>
-                    </div>
-                    <div class="row border-top">
-                        <div>p || true = true</div>
-                        <div>Domination laws</div>
-                    </div>
-                    <div class="row">
-                        <div>p && false = false</div>
-                        <div></div>
-                    </div>
-                    <div class="row border-top">
-                        <div>p || !p = true</div>
-                        <div>Negation laws</div>
-                    </div>
-                    <div class="row">
-                        <div>p && !p = false</div>
-                        <div></div>
-                    </div>
-                    <div class="row border-top keep-padding">
-                        <div>!(!p) = p</div>
-                        <div>Double negation law</div>
-                    </div>
+
+                </div>
 
             </div>
 

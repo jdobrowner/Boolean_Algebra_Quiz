@@ -331,7 +331,7 @@ var quizApp = {
         + '<tr><td><span class="code">= true || b </span>by Negation law</td></tr>'
         + '<tr><td><span class="code">= true </span>by Domination law</td></tr>' +'</table>',
 
-        '<table><tr><td>Solution:</td></tr><span class="code">'
+        '<p>Solution:</p><table class="truth"><span class="code">'
         + '<tr><td>a</td><td>b</td><td>a == b</td><td>c</td></tr>'
         + '<tr><td>true</td><td>true</td><td>true</td><td>a && b = true</td></tr>'
         + '<tr><td>true</td><td>false</td><td>false</td><td>a || b = true</td></tr>'
@@ -340,7 +340,7 @@ var quizApp = {
         + '</span></table>'
         + '<p>thus, <span class="code"> c = a || b</span></p>',
 
-        '<table><tr><td>Solution:</td></tr><span class="code">'
+        '<p>Solution:</p><table class="truth"><span class="code">'
         + '<tr><td>a</td><td>b</td><td>a || b</td><td>c</td></tr>'
         + '<tr><td>true</td><td>true</td><td>true</td><td>a = true</td></tr>'
         + '<tr><td>true</td><td>false</td><td>true</td><td>a = true</td></tr>'
@@ -349,7 +349,7 @@ var quizApp = {
         + '</span></table>'
         + '<p>thus, <span class="code"> c = a</span></p>',
 
-        '<table><tr><td>Solution:</td></tr><span class="code">'
+        '<p>Solution:</p><table class="truth"><span class="code">'
         + '<tr><td>a</td><td>b</td><td>c</td></tr>'
         + '<tr><td>true</td><td>true</td><td>a = true</td></tr>'
         + '<tr><td>true</td><td>false</td><td>a = true</td></tr>'
@@ -358,7 +358,7 @@ var quizApp = {
         + '</span></table>'
         + '<p>thus, <span class="code"> c = a || b</span></p>',
 
-        '<table><tr><td>Solution:</td></tr><span class="code">'
+        '<p>Solution:</p><table class="truth"><span class="code">'
         + '<tr><td>a</td><td>b</td><td>a && b</td><td>c</td></tr>'
         + '<tr><td>true</td><td>true</td><td>true</td><td>a = true</td></tr>'
         + '<tr><td>true</td><td>false</td><td>false</td><td>b = false</td></tr>'
