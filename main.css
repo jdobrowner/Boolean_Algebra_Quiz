@@ -339,6 +339,6 @@ td { padding: 12px; }
     .logic-block p, .logic-blockh4 { padding-top: 8px; }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .quiz-container { min-height: 982px; }
 }
