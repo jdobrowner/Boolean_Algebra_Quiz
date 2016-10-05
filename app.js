@@ -272,7 +272,7 @@ var quizApp = {
     questionsContentList: [
         '( a || ( a && b )) && ( c && ( c || d ))',
         '!( a && b ) || ( !c || !d )',
-        '( a || b ) || !( a && c )',
+        '( a && b ) && !( a || c )',
         '!( !a && !b && !c && !d )',
         'a || ( !a && b )',
         'a || ( b || !a )',
