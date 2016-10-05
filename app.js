@@ -165,7 +165,7 @@ function finalPage() {
     $score.removeClass('hidden');
 
     var addText = '<h2><span class="huge">';
-    addText += quizApp.state.points > 4 ? 'Congradulations!</span></br>You ' : 'Sorry,</span></br>but you '
+    addText += quizApp.state.points > 4 ? 'Congratulations!</span></br>You ' : 'Sorry,</span></br>but you '
     addText += 'are <span class="code variable">' + quizApp.howGood[quizApp.state.points] + '</span> at logic.</h2>';
     addText += '<p class="final-score">Your score:  <span class="code variable">' + quizApp.state.points + '</span> / 7</p>';
     var addButton = '<button id="retake" class="begin-quiz">try again</button>';
@@ -285,7 +285,7 @@ var quizApp = {
     choicesList: [
         ['a && c', 'a && d', 'b && c', 'b && d'],
         ['a && b && c && d', '!(a && b && c && d)', '!a || !b || c || d', '!(a || b || c || d)'],
-        ['b && c', '!b && c', 'b || !c', '!b || c'],
+        ['!b || c', '!b && c', 'b && !c', 'b || !c'],
         ['a || b || c || d', 'a && b && c && d', '!a || !b || !c || !d', '!(a || b || c || d)'],
         ['a || b', 'a && b', 'false', 'true'],
         ['a', 'b', 'a || b', 'true'],
@@ -308,11 +308,11 @@ var quizApp = {
         + '<tr><td><span class="code">= !( a && b && c && d ) </span>by Associative law</td></tr>' +'</table>',
 
         '<table><tr><td>Solution:</td></tr>'
-        +'<tr><td><span class="code">( a || b ) || !( a && c )</span></td></tr>'
-        + '<tr><td><span class="code">= ( a || b ) || ( !a || !c ) </span>by De Morgan\'s laws</td></tr>'
-        + '<tr><td><span class="code">= ( a || !a ) || ( b || !c ) </span>Associative law</td></tr>'
-        + '<tr><td><span class="code">= true || ( b || !c ) </span>by Negation law</td></tr>'
-        + '<tr><td><span class="code">= b || !c </span>by Identity law</td></tr>' +'</table>',
+        +'<tr><td><span class="code">( a && b ) && !( a || c )</span></td></tr>'
+        + '<tr><td><span class="code">= ( a && b ) && ( !a && !c ) </span>by De Morgan\'s law</td></tr>'
+        + '<tr><td><span class="code">= ( a && !a ) && ( b && !c ) </span>by Associative law</td></tr>'
+        + '<tr><td><span class="code">= false && ( b && !c ) </span>by Negation law</td></tr>'
+        + '<tr><td><span class="code">= b && !c </span>by Identity law</td></tr>' +'</table>',
 
         '<table><tr><td>Solution:</td></tr>'
         +'<tr><td><span class="code">!( !a && !b && !c && !d )</span></td></tr>'
@@ -328,7 +328,7 @@ var quizApp = {
         '<table><tr><td>Solution:</td></tr>'
         +'<tr><td><span class="code">a || (b || !a)</span></td></tr>'
         + '<tr><td><span class="code">= a || (!a || b) </span>by Commutative law</td></tr>'
-        + '<tr><td><span class="code">= (a || !a) || b </span>Associative law</td></tr>'
+        + '<tr><td><span class="code">= (a || !a) || b </span>by Associative law</td></tr>'
         + '<tr><td><span class="code">= true || b </span>by Negation law</td></tr>'
         + '<tr><td><span class="code">= true </span>by Domination law</td></tr>' +'</table>',
 
