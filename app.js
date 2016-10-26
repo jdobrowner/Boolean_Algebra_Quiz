@@ -222,6 +222,9 @@ function randomizeQuestions() {
   return randArray;
 }
 
+//------------------------- ES6 string templating -----------------------------
+var solution = '<table><tr><td>Solution:</td></tr>';
+var solutionTable = '<p>Solution:</p><table class="truth"><span class="code">';
 
 //*------- hold the state and content of the app in global quizApp ---------*
 
@@ -297,43 +300,36 @@ var quizApp = {
 
     answersList: [1, 2, 3, 1, 1, 4, 4, 3, 3, 2],
 
-    solutionText: ['<table><tr><td>Solution:</u></tr></td>' +
-        '<tr><td><span class="code">( a || ( a && b )) && ( c && ( c || d ))</span></td></tr>' +
+    solutionText: ['${solution}<tr><td><span class="code">( a || ( a && b )) && ( c && ( c || d ))</span></td></tr>' +
         '<tr><td><span class="code">= ( a ) && ( c ) </span>by Absorption law</td></tr>' + '<tr><td>\t<span class="code">= a && c</span></td></tr>' + '</table>',
 
-        '<table><tr><td>Solution:</td></tr>'
-        +'<tr><td><span class="code">!( a && b ) || ( !c || !d )</span></td></tr>'
+        '${solution}<tr><td><span class="code">!( a && b ) || ( !c || !d )</span></td></tr>'
         + '<tr><td><span class="code">= !(a && b) || !(c && d) </span>by De Morgan\'s laws</td></tr>'
         + '<tr><td><span class="code">= !(( a && b ) && ( c && d )) </span>by De Morgan\'s law</td></tr>'
         + '<tr><td><span class="code">= !( a && b && c && d ) </span>by Associative law</td></tr>' +'</table>',
 
-        '<table><tr><td>Solution:</td></tr>'
-        +'<tr><td><span class="code">( a && b ) && !( a || c )</span></td></tr>'
+        '${solution}<tr><td><span class="code">( a && b ) && !( a || c )</span></td></tr>'
         + '<tr><td><span class="code">= ( a && b ) && ( !a && !c ) </span>by De Morgan\'s law</td></tr>'
         + '<tr><td><span class="code">= ( a && !a ) && ( b && !c ) </span>by Associative law</td></tr>'
         + '<tr><td><span class="code">= false && ( b && !c ) </span>by Negation law</td></tr>'
         + '<tr><td><span class="code">= b && !c </span>by Identity law</td></tr>' +'</table>',
 
-        '<table><tr><td>Solution:</td></tr>'
-        +'<tr><td><span class="code">!( !a && !b && !c && !d )</span></td></tr>'
+        '${solution}<tr><td><span class="code">!( !a && !b && !c && !d )</span></td></tr>'
         + '<tr><td><span class="code">= !!( a || b || d || c ) </span>by De Morgan\'s law</td></tr>'
         + '<tr><td><span class="code">= a || b || c || d </span>by Double Negation law</td></tr>' +'</table>',
 
-        '<table><tr><td>Solution:</td></tr>'
-        +'<tr><td><span class="code">a || (!a && b)</span></td></tr>'
+        '${solution}<tr><td><span class="code">a || (!a && b)</span></td></tr>'
         + '<tr><td><span class="code">= (a || !a) && (a || b) </span>by Distributive law</td></tr>'
         + '<tr><td><span class="code">= true && (a || b) </span>by Negation law</td></tr>'
         + '<tr><td><span class="code">= a || b </span>by Identity law</td></tr>' +'</table>',
 
-        '<table><tr><td>Solution:</td></tr>'
-        +'<tr><td><span class="code">a || (b || !a)</span></td></tr>'
+        '${solution}<tr><td><span class="code">a || (b || !a)</span></td></tr>'
         + '<tr><td><span class="code">= a || (!a || b) </span>by Commutative law</td></tr>'
         + '<tr><td><span class="code">= (a || !a) || b </span>by Associative law</td></tr>'
         + '<tr><td><span class="code">= true || b </span>by Negation law</td></tr>'
         + '<tr><td><span class="code">= true </span>by Domination law</td></tr>' +'</table>',
 
-        '<p>Solution:</p><table class="truth"><span class="code">'
-        + '<tr><td>a</td><td>b</td><td>a == b</td><td>c</td></tr>'
+        '${solutionTable}<tr><td>a</td><td>b</td><td>a == b</td><td>c</td></tr>'
         + '<tr><td>true</td><td>true</td><td>true</td><td>a && b = true</td></tr>'
         + '<tr><td>true</td><td>false</td><td>false</td><td>a || b = true</td></tr>'
         + '<tr><td>false</td><td>true</td><td>false</td><td>a || b = true</td></tr>'
@@ -341,8 +337,7 @@ var quizApp = {
         + '</span></table>'
         + '<p>thus, <span class="code"> c = a || b</span></p>',
 
-        '<p>Solution:</p><table class="truth"><span class="code">'
-        + '<tr><td>a</td><td>b</td><td>a || b</td><td>c</td></tr>'
+        '${solutionTable}<tr><td>a</td><td>b</td><td>a || b</td><td>c</td></tr>'
         + '<tr><td>true</td><td>true</td><td>true</td><td>a = true</td></tr>'
         + '<tr><td>true</td><td>false</td><td>true</td><td>a = true</td></tr>'
         + '<tr><td>false</td><td>true</td><td>true</td><td>a = false</td></tr>'
@@ -350,8 +345,7 @@ var quizApp = {
         + '</span></table>'
         + '<p>thus, <span class="code"> c = a</span></p>',
 
-        '<p>Solution:</p><table class="truth"><span class="code">'
-        + '<tr><td>a</td><td>b</td><td>c</td></tr>'
+        '${solutionTable}<tr><td>a</td><td>b</td><td>c</td></tr>'
         + '<tr><td>true</td><td>true</td><td>a = true</td></tr>'
         + '<tr><td>true</td><td>false</td><td>a = true</td></tr>'
         + '<tr><td>false</td><td>true</td><td>b = true</td></tr>'
@@ -359,8 +353,7 @@ var quizApp = {
         + '</span></table>'
         + '<p>thus, <span class="code"> c = a || b</span></p>',
 
-        '<p>Solution:</p><table class="truth"><span class="code">'
-        + '<tr><td>a</td><td>b</td><td>a && b</td><td>c</td></tr>'
+        '${solutionTable}<tr><td>a</td><td>b</td><td>a && b</td><td>c</td></tr>'
         + '<tr><td>true</td><td>true</td><td>true</td><td>a = true</td></tr>'
         + '<tr><td>true</td><td>false</td><td>false</td><td>b = false</td></tr>'
         + '<tr><td>false</td><td>true</td><td>false</td><td>b = true</td></tr>'

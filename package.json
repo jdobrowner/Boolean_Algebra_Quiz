@@ -1,0 +1,26 @@
+{
+  "name": "logic_quiz",
+  "version": "1.0.2",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "build:js": "npm run clean:js && webpack",
+    "watch:js": "npm run build:js && webpack --watch",
+    "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js build/$npm_package_name.$npm_package_version.js.map"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdobrowner/Boolean_Algebra_Quiz.git"
+  },
+  "author": "Jason Dobrowner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jdobrowner/Boolean_Algebra_Quiz/issues"
+  },
+  "homepage": "https://github.com/jdobrowner/Boolean_Algebra_Quiz#readme",
+  "devDependencies": {
+    "babel-core": "^6.18.0",
+    "babel-loader": "^6.2.6",
+    "babel-preset-es2015": "^6.18.0"
+  }
+}
